@@ -1,5 +1,7 @@
 // Import the Express module
 const express = require('express');
+// Added the following line to import the htmlRoutes.js file
+const htmlRoutes = require('./routes/htmlRoutes');
 
 // Create an instance of an Express server
 const app = express();
@@ -11,6 +13,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
+
+// Added the following line to use the htmlRoutes.js file
+app.use('/', htmlRoutes);
 
 // Start the server and listen on the specified port
 app.listen(PORT, () => {
