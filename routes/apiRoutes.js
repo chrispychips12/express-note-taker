@@ -3,54 +3,54 @@ const path = require('path');
 const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 
-// GET 
+// GET /api/notes - Retrieve all notes
 router.get('/notes', (req, res) => {
-    fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '../Develop/db/db.json'), 'utf8', (err, data) => {
         if (err) {
-            console.error(err); // Log the error
-            return res.status(500).json({ error: 'Failed to read notes data' }); // Return 500 error
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to read notes data' });
         }
-        res.json(JSON.parse(data)); // Send back the parsed notes data
+        res.json(JSON.parse(data));
     });
 });
 
-// POST 
+// POST /api/notes - Save a new note
 router.post('/notes', (req, res) => {
-    const newNote = { id: uuidv4(), ...req.body }; // Create a new note with a unique ID
-    fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
+    const newNote = { id: uuidv4(), ...req.body };
+    fs.readFile(path.join(__dirname, '../Develop/db/db.json'), 'utf8', (err, data) => {
         if (err) {
-            console.error(err); // Log the error
-            return res.status(500).json({ error: 'Failed to save new note' }); // Return 500 error
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to save new note' });
         }
-        const notes = JSON.parse(data); // Parse existing notes
-        notes.push(newNote); // Add the new note
+        const notes = JSON.parse(data);
+        notes.push(newNote);
         fs.writeFile(path.join(__dirname, '../Develop/db/db.json'), JSON.stringify(notes, null, 2), (err) => {
             if (err) {
-                console.error(err); // Log the error
-                return res.status(500).json({ error: 'Failed to write note to database' }); // Return 500 error
+                console.error(err);
+                return res.status(500).json({ error: 'Failed to write note to database' });
             }
-            res.json(newNote); // Send back the newly created note
+            res.json(newNote);
         });
     });
 });
 
-// DELETE 
+// DELETE /api/notes/:id - Delete a note by ID
 router.delete('/notes/:id', (req, res) => {
-    fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '../Develop/db/db.json'), 'utf8', (err, data) => {
         if (err) {
-            console.error(err); // Log the error
-            return res.status(500).json({ error: 'Failed to read notes data' }); // Return 500 error
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to read notes data' });
         }
-        let notes = JSON.parse(data); // Parse existing notes
-        notes = notes.filter(note => note.id !== req.params.id); // Filter out the note with the given ID
+        let notes = JSON.parse(data);
+        notes = notes.filter(note => note.id !== req.params.id);
         fs.writeFile(path.join(__dirname, '../Develop/db/db.json'), JSON.stringify(notes, null, 2), (err) => {
             if (err) {
-                console.error(err); // Log the error
-                return res.status(500).json({ error: 'Failed to delete note' }); // Return 500 error
+                console.error(err);
+                return res.status(500).json({ error: 'Failed to delete note' });
             }
-            res.json({ success: true }); // Send success message
+            res.json({ success: true });
         });
     });
 });
-module.exports = router;
 
+module.exports = router;
