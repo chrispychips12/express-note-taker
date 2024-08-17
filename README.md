@@ -1,10 +1,10 @@
 
 # Express Note Taker Application
 
-Deployed Application
+Deployed Application: 
 
-Live Site: Express Note Taker
-GitHub Repository: Express Note Taker Repo
+Live Site: https://express-note-taker-wb08.onrender.com/
+GitHub Repository: https://github.com/chrispychips12/express-note-taker
 
 ## Description
 A simple note-taking application that allows users to create, save, and delete notes.
