@@ -1,8 +1,10 @@
 // Import the Express module
 const express = require('express');
-// Added the following line to import the htmlRoutes.js file
+
+// Import the htmlRoutes.js file
 const htmlRoutes = require('./routes/htmlRoutes');
-// Added the following line to import the apiRoutes.js file
+
+// Import the apiRoutes.js file
 const apiRoutes = require('./routes/apiRoutes');
 
 // Create an instance of an Express server
@@ -16,11 +18,11 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 
-// Added the following line to use the htmlRoutes.js file
-app.use('/', htmlRoutes);
-
-// Added the following line to use the apiRoutes.js file
+// Use the API routes for all requests to /api
 app.use('/api', apiRoutes);
+
+// Use the HTML routes for all other requests
+app.use('/', htmlRoutes);
 
 // Start the server and listen on the specified port
 app.listen(PORT, () => {

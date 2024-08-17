@@ -3,8 +3,8 @@ const path = require('path');
 const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 
-// GET /api/notes - Retrieve all notes
-router.get('/api/notes', (req, res) => {
+// GET 
+router.get('/notes', (req, res) => {
     fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {
             console.error(err); // Log the error
@@ -14,8 +14,8 @@ router.get('/api/notes', (req, res) => {
     });
 });
 
-// POST /api/notes - Save a new note
-router.post('/api/notes', (req, res) => {
+// POST 
+router.post('/notes', (req, res) => {
     const newNote = { id: uuidv4(), ...req.body }; // Create a new note with a unique ID
     fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {
@@ -34,8 +34,8 @@ router.post('/api/notes', (req, res) => {
     });
 });
 
-// DELETE /api/notes/:id - Delete a note by ID
-router.delete('/api/notes/:id', (req, res) => {
+// DELETE 
+router.delete('/notes/:id', (req, res) => {
     fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {
             console.error(err); // Log the error
