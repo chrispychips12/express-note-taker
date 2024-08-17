@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 
 // GET /api/notes - Retrieve all notes
 router.get('/api/notes', (req, res) => {
-    fs.readFile(path.join(__dirname, '../Develop/db/db.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {
             console.error(err); // Log the error
             return res.status(500).json({ error: 'Failed to read notes data' }); // Return 500 error
@@ -17,7 +17,7 @@ router.get('/api/notes', (req, res) => {
 // POST /api/notes - Save a new note
 router.post('/api/notes', (req, res) => {
     const newNote = { id: uuidv4(), ...req.body }; // Create a new note with a unique ID
-    fs.readFile(path.join(__dirname, '../Develop/db/db.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {
             console.error(err); // Log the error
             return res.status(500).json({ error: 'Failed to save new note' }); // Return 500 error
@@ -36,7 +36,7 @@ router.post('/api/notes', (req, res) => {
 
 // DELETE /api/notes/:id - Delete a note by ID
 router.delete('/api/notes/:id', (req, res) => {
-    fs.readFile(path.join(__dirname, '../Develop/db/db.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '../db/db.json'), 'utf8', (err, data) => {
         if (err) {
             console.error(err); // Log the error
             return res.status(500).json({ error: 'Failed to read notes data' }); // Return 500 error
